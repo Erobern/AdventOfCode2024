@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "adventofcode2023"
+group = "adventofcode2024"
 version = "1.0-SNAPSHOT"
 
 repositories {
