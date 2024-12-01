@@ -1,8 +1,6 @@
 package adventofcode2024;
 
-import adventofcode2024.solvers.*;
-
-import java.util.Optional;
+import adventofcode2024.solvers.Day1;
 
 public class Main {
     public static void main(String[] args) {
