@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Day1 {
     public static String Puzzle1(String input) {
-
         List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<Integer> leftSide = new ArrayList<>();
@@ -32,7 +31,6 @@ public class Day1 {
     }
 
     public static String Puzzle2(String input) {
-
         List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<Integer> leftSide = new ArrayList<>();
