@@ -15,7 +15,7 @@ public class Day3 {
         List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         AtomicReference<Long> sum = new AtomicReference<>(0L);
-        Pattern pattern = Pattern.compile("mul\\([0-9]*,[0-9]*\\)");
+        Pattern pattern = Pattern.compile("mul\\([0-9]{1,3},[0-9]{1,3}\\)");
 
         lines.forEach(line -> {
             Matcher matcher = pattern.matcher(line);
@@ -32,7 +32,7 @@ public class Day3 {
 
         AtomicReference<Long> sum = new AtomicReference<>(0L);
         AtomicBoolean enabled = new AtomicBoolean(true);
-        Pattern pattern = Pattern.compile("(mul\\([0-9]*,[0-9]*\\))|(do\\(\\))|(don't\\(\\))");
+        Pattern pattern = Pattern.compile("(mul\\([0-9]{1,3},[0-9]{1,3}\\))|(do\\(\\))|(don't\\(\\))");
 
         lines.forEach(line -> {
             Matcher matcher = pattern.matcher(line);
