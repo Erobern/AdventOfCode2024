@@ -4,6 +4,7 @@ import adventofcode2024.solvers.Day1;
 import adventofcode2024.solvers.Day2;
 import adventofcode2024.solvers.Day3;
 import adventofcode2024.solvers.Day4;
+import adventofcode2024.solvers.Day5;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,5 +19,8 @@ public class Main {
 
         System.out.println("Day4/Puzzle1: " + Day4.Puzzle1("Day4_1.txt"));
         System.out.println("Day4/Puzzle2: " + Day4.Puzzle2("Day4_1.txt"));
+
+        System.out.println("Day5/Puzzle1: " + Day5.Puzzle1("Day5_1.txt"));
+        System.out.println("Day5/Puzzle2: " + Day5.Puzzle2("Day5_1.txt"));
     }
 }
