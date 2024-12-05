@@ -30,9 +30,13 @@ public class Day5 {
             printOrders.add(Arrays.stream(lines.get(i).split(",")).map(Integer::parseInt).toList());
         }
 
+        //parsing input data finally done - lets proceed
+
         AtomicReference<Integer> validOrdersSum = new AtomicReference<>(0);
 
         printOrders.forEach(printOrder -> {
+            // for each print order, look for a failing rule - as soon as we can rule it out the order we can move on
+
             boolean validPrintOrder = true;
 
             for (Rule rule : rules) {
@@ -79,8 +83,11 @@ public class Day5 {
             printOrders.add(Arrays.stream(lines.get(i).split(",")).map(Integer::parseInt).toList());
         }
 
+        //parsing input data finally done - lets proceed
+
         List<List<Integer>> invalidPrintOrders = new ArrayList<>();
 
+        // collect all invalid print orders for correction
         printOrders.forEach(printOrder -> {
             boolean validPrintOrder = true;
 
@@ -104,6 +111,11 @@ public class Day5 {
         });
 
         AtomicReference<Integer> fixedOrdersSum = new AtomicReference<>(0);
+
+        // for each invalid print order, start by filtering out any rules which don't apply to the set
+        // then start a new ordered list based off the first valid rule
+        // for every remaining page, try inserting it into every position in a copy of the candidate lists
+        // rule out lists, repeat until you're left with a final valid list
 
         invalidPrintOrders.forEach(invalidPrintOrder -> {
             List<List<Integer>> candidateFixedPrintOrders = new ArrayList<>();
@@ -172,6 +184,7 @@ public class Day5 {
 
             }
 
+            // we trust that by this point we are left with only one valid candidate list
             List<Integer> fixedPrintOrder = candidateFixedPrintOrders.getFirst();
 
             fixedOrdersSum.updateAndGet(v -> v + (fixedPrintOrder.get((fixedPrintOrder.size() - 1) / 2)));
