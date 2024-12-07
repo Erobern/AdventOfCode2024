@@ -22,46 +22,23 @@ public class Day7 {
 
         AtomicReference<Long> sum = new AtomicReference<>(0L);
 
-        parsedEvalRecords.stream().forEach(parsedEvalRecord -> {
-            List<EvalRecord> currentList = new ArrayList<>();
+        parsedEvalRecords.forEach(parsedEvalRecord -> {
+            List<EvalRecord> currentList;
             List<EvalRecord> nextList = new ArrayList<>();
-
             currentList = new ArrayList<>(Collections.singleton(parsedEvalRecord));
 
             AtomicBoolean continueEvals = new AtomicBoolean(true);
-            while (continueEvals.get()) {
 
+            while (continueEvals.get()) {
                 List<EvalRecord> finalNextList = nextList;
                 currentList.forEach(currentRecord -> {
 
                     if (currentRecord.tokens.size() >= 2 && continueEvals.get()) {
                         // add
-                        Long testAddSum = currentRecord.tokens.get(0) + currentRecord.tokens.get(1);
-                        List<Long> updatedAddTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
-                        updatedAddTokens.removeFirst();
-                        updatedAddTokens.addFirst(testAddSum);
-                        EvalRecord add = new EvalRecord(testAddSum, updatedAddTokens);
-                        if (add.testSum <= parsedEvalRecord.testSum && add.tokens.size() >= 2) {
-                            finalNextList.add(add);
-                        } else if (add.tokens.size() == 1 && add.testSum.equals(parsedEvalRecord.testSum)) {
-                            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
-                            continueEvals.set(false);
-                            return;
-                        }
+                        testOperation(Operation.ADD, parsedEvalRecord, currentRecord, finalNextList, sum, continueEvals);
                         // multiply
-                        Long testMultiplySum = currentRecord.tokens.get(0) * currentRecord.tokens.get(1);
-                        List<Long> updatedMultTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
-                        updatedMultTokens.removeFirst();
-                        updatedMultTokens.addFirst(testMultiplySum);
-                        EvalRecord multiply = new EvalRecord(testMultiplySum, updatedMultTokens);
-                        if (multiply.testSum <= parsedEvalRecord.testSum && add.tokens.size() >= 2) {
-                            finalNextList.add(multiply);
-                        } else if (multiply.tokens.size() == 1 && multiply.testSum.equals(parsedEvalRecord.testSum)) {
-                            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
-                            continueEvals.set(false);
-                        }
+                        testOperation(Operation.MULTIPLY, parsedEvalRecord, currentRecord, finalNextList, sum, continueEvals);
                     }
-
                 });
 
                 if (!nextList.isEmpty()) {
@@ -70,10 +47,7 @@ public class Day7 {
                 } else {
                     return;
                 }
-
             }
-
-
         });
 
         return sum.toString();
@@ -91,56 +65,24 @@ public class Day7 {
 
         AtomicReference<Long> sum = new AtomicReference<>(0L);
 
-        parsedEvalRecords.stream().forEach(parsedEvalRecord -> {
-            List<EvalRecord> currentList = new ArrayList<>();
+        parsedEvalRecords.forEach(parsedEvalRecord -> {
+            List<EvalRecord> currentList;
             List<EvalRecord> nextList = new ArrayList<>();
-
             currentList = new ArrayList<>(Collections.singleton(parsedEvalRecord));
 
             AtomicBoolean continueEvals = new AtomicBoolean(true);
-            while (continueEvals.get()) {
 
+            while (continueEvals.get()) {
                 List<EvalRecord> finalNextList = nextList;
                 currentList.forEach(currentRecord -> {
 
                     if (currentRecord.tokens.size() >= 2 && continueEvals.get()) {
                         // add
-                        Long testAddSum = currentRecord.tokens.get(0) + currentRecord.tokens.get(1);
-                        List<Long> updatedAddTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
-                        updatedAddTokens.removeFirst();
-                        updatedAddTokens.addFirst(testAddSum);
-                        EvalRecord add = new EvalRecord(testAddSum, updatedAddTokens);
-                        if (add.testSum <= parsedEvalRecord.testSum && add.tokens.size() >= 2) {
-                            finalNextList.add(add);
-                        } else if (add.tokens.size() == 1 && add.testSum.equals(parsedEvalRecord.testSum)) {
-                            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
-                            continueEvals.set(false);
-                            return;
-                        }
+                        testOperation(Operation.ADD, parsedEvalRecord, currentRecord, finalNextList, sum, continueEvals);
                         // multiply
-                        Long testMultiplySum = currentRecord.tokens.get(0) * currentRecord.tokens.get(1);
-                        List<Long> updatedMultTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
-                        updatedMultTokens.removeFirst();
-                        updatedMultTokens.addFirst(testMultiplySum);
-                        EvalRecord multiply = new EvalRecord(testMultiplySum, updatedMultTokens);
-                        if (multiply.testSum <= parsedEvalRecord.testSum && multiply.tokens.size() >= 2) {
-                            finalNextList.add(multiply);
-                        } else if (multiply.tokens.size() == 1 && multiply.testSum.equals(parsedEvalRecord.testSum)) {
-                            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
-                            continueEvals.set(false);
-                        }
+                        testOperation(Operation.MULTIPLY, parsedEvalRecord, currentRecord, finalNextList, sum, continueEvals);
                         // concatenate
-                        Long testConcatSum = Long.parseLong(currentRecord.tokens.get(0).toString() + currentRecord.tokens.get(1).toString());
-                        List<Long> updatedConcatTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
-                        updatedConcatTokens.removeFirst();
-                        updatedConcatTokens.addFirst(testConcatSum);
-                        EvalRecord concat = new EvalRecord(testConcatSum, updatedConcatTokens);
-                        if (concat.testSum <= parsedEvalRecord.testSum && concat.tokens.size() >= 2) {
-                            finalNextList.add(concat);
-                        } else if (concat.tokens.size() == 1 && concat.testSum.equals(parsedEvalRecord.testSum)) {
-                            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
-                            continueEvals.set(false);
-                        }
+                        testOperation(Operation.CONCAT, parsedEvalRecord, currentRecord, finalNextList, sum, continueEvals);
                     }
 
                 });
@@ -151,13 +93,35 @@ public class Day7 {
                 } else {
                     return;
                 }
-
             }
-
-
         });
 
         return sum.toString();
+    }
+
+    private static void testOperation(Operation operation, EvalRecord parsedEvalRecord, EvalRecord currentRecord, List<EvalRecord> finalNextList, AtomicReference<Long> sum, AtomicBoolean continueEvals) {
+        Long testSum = 0L;
+        if (operation == Operation.CONCAT) {
+            testSum = Long.parseLong(currentRecord.tokens.get(0).toString() + currentRecord.tokens.get(1).toString());
+        } else if (operation == Operation.MULTIPLY) {
+            testSum = currentRecord.tokens.get(0) * currentRecord.tokens.get(1);
+        } else if (operation == Operation.ADD) {
+            testSum = currentRecord.tokens.get(0) + currentRecord.tokens.get(1);
+        }
+        List<Long> updatedTokens = new ArrayList<>(currentRecord.tokens.subList(1, currentRecord.tokens.size()));
+        updatedTokens.removeFirst();
+        updatedTokens.addFirst(testSum);
+        EvalRecord newRecord = new EvalRecord(testSum, updatedTokens);
+        if (newRecord.testSum <= parsedEvalRecord.testSum && newRecord.tokens.size() >= 2) {
+            finalNextList.add(newRecord);
+        } else if (newRecord.tokens.size() == 1 && newRecord.testSum.equals(parsedEvalRecord.testSum)) {
+            sum.updateAndGet(v -> v + parsedEvalRecord.testSum);
+            continueEvals.set(false);
+        }
+    }
+
+    enum Operation {
+        ADD, MULTIPLY, CONCAT
     }
 
     record EvalRecord(Long testSum, List<Long> tokens) {
