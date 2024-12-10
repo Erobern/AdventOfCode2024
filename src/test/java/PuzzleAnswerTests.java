@@ -38,4 +38,9 @@ public class PuzzleAnswerTests {
     public void Puzzle9Solutions_ExtraTests() {
         Assertions.assertEquals("132", Day9.Puzzle2("Day9_2_TEST.txt"), "Day 9, Puzzle 2 - EXTRA");
     }
+
+    @Test
+    public void Puzzle10Solutions() {
+        Assertions.assertEquals("36", Day10.Puzzle1("Day10_1_TEST.txt"), "Day 10, Puzzle 1");
+    }
 }
