@@ -1,6 +1,6 @@
 package adventofcode2024;
 
-import adventofcode2024.solvers.Day9;
+import adventofcode2024.solvers.Day10;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,8 +27,11 @@ public class Main {
 //
 //        System.out.println("Day8/Puzzle1: " + Day8.Puzzle1("Day8_1.txt"));
 //        System.out.println("Day8/Puzzle2: " + Day8.Puzzle2("Day8_1.txt"));
+//
+//        System.out.println("Day9/Puzzle1: " + Day9.Puzzle1("Day9_1.txt"));
+//        System.out.println("Day9/Puzzle2: " + Day9.Puzzle2("Day9_1.txt"));
 
-        System.out.println("Day9/Puzzle1: " + Day9.Puzzle1("Day9_1.txt"));
-        System.out.println("Day9/Puzzle2: " + Day9.Puzzle2("Day9_1.txt"));
+        System.out.println("Day10/Puzzle1: " + Day10.Puzzle1("Day10_1.txt"));
+        System.out.println("Day10/Puzzle2: " + Day10.Puzzle2("Day10_1.txt"));
     }
 }
