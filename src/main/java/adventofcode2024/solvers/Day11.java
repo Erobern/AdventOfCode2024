@@ -72,6 +72,8 @@ public class Day11 {
                             grouped.get(value).stream().map(Stone::copies).reduce(0L, Long::sum))
             ).toList();
 
+            System.out.println(grouped.size());
+
             currList = new ArrayList<>(groupList);
             nextList = new ArrayList<>();
             groupList = new ArrayList<>();
