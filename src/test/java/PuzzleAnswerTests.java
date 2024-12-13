@@ -49,4 +49,27 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("55312", Day11.Puzzle1("Day11_1_TEST.txt"), "Day 11, Puzzle 1");
         Assertions.assertEquals("65601038650482", Day11.Puzzle2("Day11_1_TEST.txt"), "Day 11, Puzzle 2");
     }
+
+    @Test
+    public void Puzzle12SolutionsSmall() {
+        Assertions.assertEquals("140", Day12.Puzzle1("Day12_2_TEST_SMALL.txt"), "Day 12, Puzzle 1");
+        Assertions.assertEquals("80", Day12.Puzzle2("Day12_2_TEST_SMALL.txt"), "Day 12, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle12SolutionsBoxes() {
+        Assertions.assertEquals("1184", Day12.Puzzle1("Day12_2_TEST_BOXES.txt"), "Day 12, Puzzle 1");
+        Assertions.assertEquals("368", Day12.Puzzle2("Day12_2_TEST_BOXES.txt"), "Day 12, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle12Solutions() {
+        Assertions.assertEquals("1930", Day12.Puzzle1("Day12_1_TEST.txt"), "Day 12, Puzzle 1");
+        Assertions.assertEquals("1206", Day12.Puzzle2("Day12_1_TEST.txt"), "Day 12, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle12SolutionsLs() {
+        Assertions.assertEquals("6568", Day12.Puzzle2("Day12_2_TEST_L.txt"), "Day 12, Puzzle 2");
+    }
 }
