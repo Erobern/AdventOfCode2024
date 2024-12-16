@@ -89,4 +89,16 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("10092", Day15.Puzzle1("Day15_1_TEST_grid.txt", "Day15_1_TEST_instruction.txt"), "Day 15, Puzzle 1");
         Assertions.assertEquals("9021", Day15.Puzzle2("Day15_1_TEST_grid.txt", "Day15_1_TEST_instruction.txt"), "Day 15, Puzzle 1");
     }
+
+    @Test
+    public void Puzzle12Solutions1() {
+        Assertions.assertEquals("7036", Day16.Puzzle1("Day16_1_TEST.txt"), "Day 16, Puzzle 1");
+        Assertions.assertEquals("45", Day16.Puzzle2("Day16_1_TEST.txt"), "Day 16, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle12Solutions2() {
+        Assertions.assertEquals("11048", Day16.Puzzle1("Day16_2_TEST.txt"), "Day 16, Puzzle 1");
+        Assertions.assertEquals("64", Day16.Puzzle2("Day16_2_TEST.txt"), "Day 16, Puzzle 2");
+    }
 }
