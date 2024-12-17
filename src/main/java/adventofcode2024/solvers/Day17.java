@@ -260,7 +260,7 @@ public class Day17 {
         Integer digitsFound = 0;
         String matchString = String.valueOf(program.get(program.size() - digitsFound - 1));
 
-        for (long i = 0; i < Long.MAX_VALUE; i++) {
+        for (long i = 1; i < Long.MAX_VALUE; i++) {
 
             registerA = i;
             registerB = originalRegisterB;
@@ -442,7 +442,11 @@ public class Day17 {
                 }
 
                 // give ourselves a little buffer on the low side by taking 2 points off first
-                i = ((i - 2) * 8L);
+                if (i >= 3) {
+                    i = ((i - 2) * 8L);
+                } else {
+                    i = i * 8L;
+                }
 
                 matchString = "," + matchString;
                 matchString = program.get(program.size() - digitsFound - 1) + matchString;
