@@ -231,7 +231,7 @@ public class Day17 {
 
     public static String Puzzle2(String input) {
         List<String> lines = FileLoaders.loadInputIntoStringList(input);
-
+        
         return "";
     }
 
