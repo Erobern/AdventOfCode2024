@@ -91,14 +91,36 @@ public class PuzzleAnswerTests {
     }
 
     @Test
-    public void Puzzle12Solutions1() {
+    public void Puzzle16Solutions1() {
         Assertions.assertEquals("7036", Day16.Puzzle1("Day16_1_TEST.txt"), "Day 16, Puzzle 1");
         Assertions.assertEquals("45", Day16.Puzzle2("Day16_1_TEST.txt"), "Day 16, Puzzle 2");
     }
 
     @Test
-    public void Puzzle12Solutions2() {
+    public void Puzzle16Solutions2() {
         Assertions.assertEquals("11048", Day16.Puzzle1("Day16_2_TEST.txt"), "Day 16, Puzzle 1");
         Assertions.assertEquals("64", Day16.Puzzle2("Day16_2_TEST.txt"), "Day 16, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle17Solutions() {
+        Assertions.assertEquals("4,6,3,5,6,3,5,2,1,0", Day17.Puzzle1("Day17_1_TEST.txt"), "Day 17, Puzzle 1");
+        Assertions.assertEquals("4,2,5,6,7,7,7,7,3,1,0", Day17.Puzzle1("Day17_2_TEST.txt"), "Day 17, Puzzle 1");
+        Assertions.assertEquals("117440", Day17.Puzzle2("Day17_3_TEST.txt"), "Day 17, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle17SolutionsIndividualTests() {
+        Assertions.assertEquals("4", Day17.Puzzle1("Day17Tests/Day17_1_TEST_ADV1.txt"), "Day 17, Puzzle 1");
+        Assertions.assertEquals("0", Day17.Puzzle1("Day17Tests/Day17_1_TEST_ADV2.txt"), "Day 17, Puzzle 1");
+        Assertions.assertEquals("0", Day17.Puzzle1("Day17Tests/Day17_1_TEST_ADV3.txt"), "Day 17, Puzzle 1");
+
+        Assertions.assertEquals("2", Day17.Puzzle1("Day17Tests/Day17_1_TEST_BXL1.txt"), "Day 17, Puzzle 1");
+
+        Assertions.assertEquals("2", Day17.Puzzle1("Day17Tests/Day17_1_TEST_BST1.txt"), "Day 17, Puzzle 1");
+
+        Assertions.assertEquals("1", Day17.Puzzle1("Day17Tests/Day17_1_TEST_JNZ1.txt"), "Day 17, Puzzle 1");
+
+        Assertions.assertEquals("1", Day17.Puzzle1("Day17Tests/Day17_1_TEST_BXC1.txt"), "Day 17, Puzzle 1");
     }
 }
