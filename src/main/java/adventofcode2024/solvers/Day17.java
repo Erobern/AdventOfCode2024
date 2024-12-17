@@ -267,11 +267,10 @@ public class Day17 {
             registerC = originalRegisterC;
 
             halt = false;
-            outputHalt = false;
             programPointer = 0;
             output = new ArrayList<>();
 
-            while (!halt && !outputHalt) {
+            while (!halt) {
 
                 comboOperand = 0;
                 literalOperand = 0;
