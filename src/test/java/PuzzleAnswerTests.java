@@ -1,4 +1,18 @@
-import adventofcode2024.solvers.*;
+import adventofcode2024.solvers.Day10;
+import adventofcode2024.solvers.Day11;
+import adventofcode2024.solvers.Day12;
+import adventofcode2024.solvers.Day13;
+import adventofcode2024.solvers.Day14;
+import adventofcode2024.solvers.Day15;
+import adventofcode2024.solvers.Day16;
+import adventofcode2024.solvers.Day17;
+import adventofcode2024.solvers.Day18;
+import adventofcode2024.solvers.Day19;
+import adventofcode2024.solvers.Day5;
+import adventofcode2024.solvers.Day6;
+import adventofcode2024.solvers.Day7;
+import adventofcode2024.solvers.Day8;
+import adventofcode2024.solvers.Day9;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -128,5 +142,11 @@ public class PuzzleAnswerTests {
     public void Puzzle18Solutions() {
         Assertions.assertEquals("22", Day18.Puzzle1("Day18_1_TEST.txt", 7, 12), "Day 18, Puzzle 1");
         Assertions.assertEquals("6,1", Day18.Puzzle2("Day18_1_TEST.txt", 7, 12), "Day 18, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle19Solutions() {
+        Assertions.assertEquals("6", Day19.Puzzle1("Day19_1_TEST.txt"), "Day 19, Puzzle 1");
+        Assertions.assertEquals("16", Day19.Puzzle2("Day19_1_TEST.txt"), "Day 19, Puzzle 2");
     }
 }
