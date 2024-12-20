@@ -1,6 +1,7 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.*;
 
@@ -105,12 +106,12 @@ public class Day20 {
             // look for cheats
             // up
             try {
-                if (!Objects.equals(grid[coordinate.row - 2][coordinate.col], "#")) {
-                    if (Integer.parseInt(grid[coordinate.row - 2][coordinate.col]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) > 2) {
+                if (!Objects.equals(grid[coordinate.row() - 2][coordinate.col()], "#")) {
+                    if (Integer.parseInt(grid[coordinate.row() - 2][coordinate.col()]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) > 2) {
                         cheats.add(new Cheat(
                                 coordinate,
-                                new Coordinate(coordinate.row - 2, coordinate.col),
-                                Integer.parseInt(grid[coordinate.row - 2][coordinate.col]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) - 2
+                                new Coordinate(coordinate.row() - 2, coordinate.col()),
+                                Integer.parseInt(grid[coordinate.row() - 2][coordinate.col()]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) - 2
                         ));
                     }
                 }
@@ -119,12 +120,12 @@ public class Day20 {
             }
             // down
             try {
-                if (!Objects.equals(grid[coordinate.row + 2][coordinate.col], "#")) {
-                    if (Integer.parseInt(grid[coordinate.row + 2][coordinate.col]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) > 2) {
+                if (!Objects.equals(grid[coordinate.row() + 2][coordinate.col()], "#")) {
+                    if (Integer.parseInt(grid[coordinate.row() + 2][coordinate.col()]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) > 2) {
                         cheats.add(new Cheat(
                                 coordinate,
-                                new Coordinate(coordinate.row + 2, coordinate.col),
-                                Integer.parseInt(grid[coordinate.row + 2][coordinate.col]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) - 2
+                                new Coordinate(coordinate.row() + 2, coordinate.col()),
+                                Integer.parseInt(grid[coordinate.row() + 2][coordinate.col()]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) - 2
                         ));
                     }
                 }
@@ -133,12 +134,12 @@ public class Day20 {
             }
             // left
             try {
-                if (!Objects.equals(grid[coordinate.row][coordinate.col - 2], "#")) {
-                    if (Integer.parseInt(grid[coordinate.row][coordinate.col - 2]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) > 2) {
+                if (!Objects.equals(grid[coordinate.row()][coordinate.col() - 2], "#")) {
+                    if (Integer.parseInt(grid[coordinate.row()][coordinate.col() - 2]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) > 2) {
                         cheats.add(new Cheat(
                                 coordinate,
-                                new Coordinate(coordinate.row, coordinate.col - 2),
-                                Integer.parseInt(grid[coordinate.row][coordinate.col - 2]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) - 2
+                                new Coordinate(coordinate.row(), coordinate.col() - 2),
+                                Integer.parseInt(grid[coordinate.row()][coordinate.col() - 2]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) - 2
                         ));
                     }
                 }
@@ -147,12 +148,12 @@ public class Day20 {
             }
             // right
             try {
-                if (!Objects.equals(grid[coordinate.row][coordinate.col + 2], "#")) {
-                    if (Integer.parseInt(grid[coordinate.row][coordinate.col + 2]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) > 2) {
+                if (!Objects.equals(grid[coordinate.row()][coordinate.col() + 2], "#")) {
+                    if (Integer.parseInt(grid[coordinate.row()][coordinate.col() + 2]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) > 2) {
                         cheats.add(new Cheat(
                                 coordinate,
-                                new Coordinate(coordinate.row, coordinate.col + 2),
-                                Integer.parseInt(grid[coordinate.row][coordinate.col + 2]) - Integer.parseInt(grid[coordinate.row][coordinate.col]) - 2
+                                new Coordinate(coordinate.row(), coordinate.col() + 2),
+                                Integer.parseInt(grid[coordinate.row()][coordinate.col() + 2]) - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) - 2
                         ));
                     }
                 }
@@ -288,33 +289,27 @@ public class Day20 {
 
             travelledPathScores.stream()
                     .filter(travelledPathScore ->
-                            Math.abs(coordinate.row - travelledPathScore.coordinate.row) <= 20 &&
-                                    Math.abs(coordinate.col - travelledPathScore.coordinate.col) <= 20)
+                            Math.abs(coordinate.row() - travelledPathScore.coordinate.row()) <= 20 &&
+                                    Math.abs(coordinate.col() - travelledPathScore.coordinate.col()) <= 20)
                     .filter(travelledPathScore ->
-                            Math.abs(coordinate.row - travelledPathScore.coordinate.row) +
-                                    Math.abs(coordinate.col - travelledPathScore.coordinate.col) <= 20)
+                            Math.abs(coordinate.row() - travelledPathScore.coordinate.row()) +
+                                    Math.abs(coordinate.col() - travelledPathScore.coordinate.col()) <= 20)
                     .filter(travelledPathScore ->
                             travelledPathScore.picoseconds - travelledPathScoreCurrent.picoseconds > 2)
                     .forEach(travelledPathScore -> {
-                        Integer offset = Math.abs(coordinate.row - travelledPathScore.coordinate.row) +
-                                Math.abs(coordinate.col - travelledPathScore.coordinate.col);
-                        if (travelledPathScore.picoseconds - Integer.parseInt(grid[coordinate.row][coordinate.col]) > offset) {
+                        Integer offset = Math.abs(coordinate.row() - travelledPathScore.coordinate.row()) +
+                                Math.abs(coordinate.col() - travelledPathScore.coordinate.col());
+                        if (travelledPathScore.picoseconds - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) > offset) {
                             cheats.put(
                                     coordinate + ":" +
                                             travelledPathScore.coordinate,
-                                    travelledPathScore.picoseconds - Integer.parseInt(grid[coordinate.row][coordinate.col]) - offset
+                                    travelledPathScore.picoseconds - Integer.parseInt(grid[coordinate.row()][coordinate.col()]) - offset
                             );
                         }
                     });
         }
 
         return String.valueOf(cheats.values().stream().filter(cheat -> cheat >= cheatThreshold).count());
-    }
-
-    record Coordinate(Integer row, Integer col) {
-        public String toString() {
-            return row + "," + col;
-        }
     }
 
     record Cheat(Coordinate startCoordinate, Coordinate endCoordinate, Integer picosecondsSaved) {

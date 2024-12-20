@@ -1,6 +1,8 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.enums.Direction;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.*;
 
@@ -34,95 +36,95 @@ public class Day16 {
 
         while (!currentTestPaths.isEmpty()) {
             for (TestPath currentTestPath : currentTestPaths) {
-                visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score);
+                visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score);
 
                 // up
-                if (Objects.equals(grid[currentTestPath.coordinate.row - 1][currentTestPath.coordinate.col], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row() - 1][currentTestPath.coordinate.col()], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.UP) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row - 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row() - 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.UP,
                                 (currentTestPath.score) + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.RIGHT || currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row - 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row() - 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.UP,
                                 (currentTestPath.score) + 1000 + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row - 1][currentTestPath.coordinate.col], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row() - 1][currentTestPath.coordinate.col()], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                     }
                 }
 
                 // down
-                if (Objects.equals(grid[currentTestPath.coordinate.row + 1][currentTestPath.coordinate.col], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row() + 1][currentTestPath.coordinate.col()], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row + 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row() + 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.DOWN,
                                 (currentTestPath.score) + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.RIGHT || currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row + 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row() + 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.DOWN,
                                 (currentTestPath.score) + 1000 + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row + 1][currentTestPath.coordinate.col], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row() + 1][currentTestPath.coordinate.col()], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                     }
                 }
 
                 // left
-                if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col - 1], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() - 1], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col - 1),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() - 1),
                                 Direction.LEFT,
                                 (currentTestPath.score) + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction), currentTestPath.score + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.UP || currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col - 1),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() - 1),
                                 Direction.LEFT,
                                 (currentTestPath.score) + 1000 + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col - 1], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() - 1], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                     }
                 }
 
                 // right
-                if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col + 1], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() + 1], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.RIGHT) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col + 1),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() + 1),
                                 Direction.RIGHT,
                                 (currentTestPath.score) + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction), currentTestPath.score + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.UP || currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col + 1),
+                        nextTestPaths.add(new TestPath(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() + 1),
                                 Direction.RIGHT,
                                 (currentTestPath.score) + 1000 + 1));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col + 1], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() + 1], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                     }
@@ -167,28 +169,28 @@ public class Day16 {
 
         while (!currentTestPaths.isEmpty()) {
             for (TestPathPart2 currentTestPath : currentTestPaths) {
-                visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score);
+                visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score);
 
                 // up
-                if (Objects.equals(grid[currentTestPath.coordinate.row - 1][currentTestPath.coordinate.col], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row() - 1][currentTestPath.coordinate.col()], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.UP) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row - 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row() - 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.UP,
                                 (currentTestPath.score) + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col()))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.RIGHT || currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row - 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row() - 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.UP,
                                 (currentTestPath.score) + 1000 + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row - 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col()))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() - 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row - 1][currentTestPath.coordinate.col], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row() - 1][currentTestPath.coordinate.col()], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                         candidateLowPaths = new ArrayList<>(List.of(currentTestPath));
@@ -198,25 +200,25 @@ public class Day16 {
                 }
 
                 // down
-                if (Objects.equals(grid[currentTestPath.coordinate.row + 1][currentTestPath.coordinate.col], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row() + 1][currentTestPath.coordinate.col()], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row + 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row() + 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.DOWN,
                                 (currentTestPath.score) + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col()))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.RIGHT || currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row + 1,
-                                currentTestPath.coordinate.col),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row() + 1,
+                                currentTestPath.coordinate.col()),
                                 Direction.DOWN,
                                 (currentTestPath.score) + 1000 + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row + 1, currentTestPath.coordinate.col, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col()))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row() + 1, currentTestPath.coordinate.col(), currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row + 1][currentTestPath.coordinate.col], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row() + 1][currentTestPath.coordinate.col()], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                         candidateLowPaths = new ArrayList<>(List.of(currentTestPath));
@@ -226,25 +228,25 @@ public class Day16 {
                 }
 
                 // left
-                if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col - 1], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() - 1], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.LEFT) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col - 1),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() - 1),
                                 Direction.LEFT,
                                 (currentTestPath.score) + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction), currentTestPath.score + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.UP || currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col - 1),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() - 1),
                                 Direction.LEFT,
                                 (currentTestPath.score) + 1000 + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col - 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() - 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col - 1], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() - 1], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                         candidateLowPaths = new ArrayList<>(List.of(currentTestPath));
@@ -254,25 +256,25 @@ public class Day16 {
                 }
 
                 // right
-                if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col + 1], ".") &&
-                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction)) ||
-                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction)) >= currentTestPath.score)) {
+                if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() + 1], ".") &&
+                        (!visitedCoordinates.containsKey(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction)) ||
+                                visitedCoordinates.get(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction)) >= currentTestPath.score)) {
                     if (currentTestPath.direction == Direction.RIGHT) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col + 1),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() + 1),
                                 Direction.RIGHT,
                                 (currentTestPath.score) + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction), currentTestPath.score + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction), currentTestPath.score + 1);
                     } else if (currentTestPath.direction == Direction.UP || currentTestPath.direction == Direction.DOWN) {
-                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row,
-                                currentTestPath.coordinate.col + 1),
+                        nextTestPaths.add(new TestPathPart2(new Coordinate(currentTestPath.coordinate.row(),
+                                currentTestPath.coordinate.col() + 1),
                                 Direction.RIGHT,
                                 (currentTestPath.score) + 1000 + 1,
-                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1))));
-                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row, currentTestPath.coordinate.col + 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
+                                currentTestPath.pathHistory.concat("," + getPathHistoryCoordinate(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1))));
+                        visitedCoordinates.put(getKeyName(currentTestPath.coordinate.row(), currentTestPath.coordinate.col() + 1, currentTestPath.direction), currentTestPath.score + 1000 + 1);
                     }
-                } else if (Objects.equals(grid[currentTestPath.coordinate.row][currentTestPath.coordinate.col + 1], "E")) {
+                } else if (Objects.equals(grid[currentTestPath.coordinate.row()][currentTestPath.coordinate.col() + 1], "E")) {
                     if (currentTestPath.score + 1 < lowestScore) {
                         lowestScore = currentTestPath.score + 1;
                         candidateLowPaths = new ArrayList<>(List.of(currentTestPath));
@@ -315,13 +317,6 @@ public class Day16 {
 
     private static String getPathHistoryCoordinate(Integer row, Integer col) {
         return row + ":" + col;
-    }
-
-    enum Direction {
-        UP, DOWN, RIGHT, LEFT
-    }
-
-    record Coordinate(Integer row, Integer col) {
     }
 
     record TestPath(Coordinate coordinate, Direction direction, Integer score) {

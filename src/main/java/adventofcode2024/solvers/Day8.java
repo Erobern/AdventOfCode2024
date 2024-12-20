@@ -1,6 +1,7 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,11 +41,11 @@ public class Day8 {
                 otherCoordinates.remove(i);
 
                 for (Coordinate otherCoordinate : otherCoordinates) {
-                    Integer rowOffset = otherCoordinate.row - coordinate.row;
-                    Integer colOffset = otherCoordinate.col - coordinate.col;
+                    Integer rowOffset = otherCoordinate.row() - coordinate.row();
+                    Integer colOffset = otherCoordinate.col() - coordinate.col();
 
                     try {
-                        antinodeGrid[coordinate.row - rowOffset][coordinate.col - colOffset] = "#";
+                        antinodeGrid[coordinate.row() - rowOffset][coordinate.col() - colOffset] = "#";
                     } catch (Exception ignored) {
                         // who cares
                     }
@@ -97,15 +98,15 @@ public class Day8 {
                 otherCoordinates.remove(i);
 
                 for (Coordinate otherCoordinate : otherCoordinates) {
-                    Integer rowOffset = otherCoordinate.row - coordinate.row;
-                    Integer colOffset = otherCoordinate.col - coordinate.col;
+                    Integer rowOffset = otherCoordinate.row() - coordinate.row();
+                    Integer colOffset = otherCoordinate.col() - coordinate.col();
 
                     boolean continueResonating = true;
                     Integer counter = 0;
 
                     while (continueResonating) {
                         try {
-                            antinodeGrid[coordinate.row - (rowOffset * counter)][coordinate.col - (colOffset * counter)] = "#";
+                            antinodeGrid[coordinate.row() - (rowOffset * counter)][coordinate.col() - (colOffset * counter)] = "#";
                             counter++;
                         } catch (Exception ignored) {
                             // this is our sign to quit
@@ -128,9 +129,6 @@ public class Day8 {
         }
 
         return sum.toString();
-    }
-
-    record Coordinate(Integer row, Integer col) {
     }
 
 }

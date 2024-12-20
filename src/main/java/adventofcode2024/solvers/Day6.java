@@ -1,6 +1,7 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -271,10 +272,6 @@ public class Day6 {
                 return false;
             }
         }
-    }
-
-    public enum Direction {
-        LEFT, RIGHT, UP, DOWN
     }
 
 }

@@ -1,6 +1,7 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -234,24 +235,24 @@ public class Day15 {
                                 List<Coordinate> newBoxes = new ArrayList<>();
 
                                 for (Coordinate coordinate : rowsAndBoxes.getLast()) {
-                                    if (Objects.equals(grid[coordinate.row + 1][coordinate.col], "#") ||
-                                            Objects.equals(grid[coordinate.row + 1][coordinate.col + 1], "#")) {
+                                    if (Objects.equals(grid[coordinate.row() + 1][coordinate.col()], "#") ||
+                                            Objects.equals(grid[coordinate.row() + 1][coordinate.col() + 1], "#")) {
                                         obstacleFound = true;
                                         break;
                                     } else {
-                                        if (Objects.equals(grid[coordinate.row + 1][coordinate.col], "]")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row + 1 && newBox.col == coordinate.col - 1)) {
-                                                newBoxes.add(new Coordinate(coordinate.row + 1, coordinate.col - 1));
+                                        if (Objects.equals(grid[coordinate.row() + 1][coordinate.col()], "]")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() + 1 && newBox.col() == coordinate.col() - 1)) {
+                                                newBoxes.add(new Coordinate(coordinate.row() + 1, coordinate.col() - 1));
                                             }
                                         }
-                                        if (Objects.equals(grid[coordinate.row + 1][coordinate.col], "[")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row + 1 && newBox.col == coordinate.col)) {
-                                                newBoxes.add(new Coordinate(coordinate.row + 1, coordinate.col));
+                                        if (Objects.equals(grid[coordinate.row() + 1][coordinate.col()], "[")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() + 1 && newBox.col() == coordinate.col())) {
+                                                newBoxes.add(new Coordinate(coordinate.row() + 1, coordinate.col()));
                                             }
                                         }
-                                        if (Objects.equals(grid[coordinate.row + 1][coordinate.col + 1], "[")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row + 1 && newBox.col == coordinate.col + 1)) {
-                                                newBoxes.add(new Coordinate(coordinate.row + 1, coordinate.col + 1));
+                                        if (Objects.equals(grid[coordinate.row() + 1][coordinate.col() + 1], "[")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() + 1 && newBox.col() == coordinate.col() + 1)) {
+                                                newBoxes.add(new Coordinate(coordinate.row() + 1, coordinate.col() + 1));
                                             }
                                         }
                                     }
@@ -270,11 +271,11 @@ public class Day15 {
                                 for (List<Coordinate> row : rowsAndBoxes.reversed()) {
                                     for (Coordinate coordinate : row) {
                                         // progress the box
-                                        grid[coordinate.row + 1][coordinate.col] = "[";
-                                        grid[coordinate.row + 1][coordinate.col + 1] = "]";
+                                        grid[coordinate.row() + 1][coordinate.col()] = "[";
+                                        grid[coordinate.row() + 1][coordinate.col() + 1] = "]";
 
-                                        grid[coordinate.row][coordinate.col] = ".";
-                                        grid[coordinate.row][coordinate.col + 1] = ".";
+                                        grid[coordinate.row()][coordinate.col()] = ".";
+                                        grid[coordinate.row()][coordinate.col() + 1] = ".";
                                     }
                                 }
 
@@ -309,24 +310,24 @@ public class Day15 {
                                 List<Coordinate> newBoxes = new ArrayList<>();
 
                                 for (Coordinate coordinate : rowsAndBoxes.getLast()) {
-                                    if (Objects.equals(grid[coordinate.row - 1][coordinate.col], "#") ||
-                                            Objects.equals(grid[coordinate.row - 1][coordinate.col + 1], "#")) {
+                                    if (Objects.equals(grid[coordinate.row() - 1][coordinate.col()], "#") ||
+                                            Objects.equals(grid[coordinate.row() - 1][coordinate.col() + 1], "#")) {
                                         obstacleFound = true;
                                         break;
                                     } else {
-                                        if (Objects.equals(grid[coordinate.row - 1][coordinate.col], "]")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row - 1 && newBox.col == coordinate.col - 1)) {
-                                                newBoxes.add(new Coordinate(coordinate.row - 1, coordinate.col - 1));
+                                        if (Objects.equals(grid[coordinate.row() - 1][coordinate.col()], "]")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() - 1 && newBox.col() == coordinate.col() - 1)) {
+                                                newBoxes.add(new Coordinate(coordinate.row() - 1, coordinate.col() - 1));
                                             }
                                         }
-                                        if (Objects.equals(grid[coordinate.row - 1][coordinate.col], "[")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row - 1 && newBox.col == coordinate.col)) {
-                                                newBoxes.add(new Coordinate(coordinate.row - 1, coordinate.col));
+                                        if (Objects.equals(grid[coordinate.row() - 1][coordinate.col()], "[")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() - 1 && newBox.col() == coordinate.col())) {
+                                                newBoxes.add(new Coordinate(coordinate.row() - 1, coordinate.col()));
                                             }
                                         }
-                                        if (Objects.equals(grid[coordinate.row - 1][coordinate.col + 1], "[")) {
-                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row == coordinate.row - 1 && newBox.col == coordinate.col + 1)) {
-                                                newBoxes.add(new Coordinate(coordinate.row - 1, coordinate.col + 1));
+                                        if (Objects.equals(grid[coordinate.row() - 1][coordinate.col() + 1], "[")) {
+                                            if (newBoxes.stream().noneMatch(newBox -> newBox.row() == coordinate.row() - 1 && newBox.col() == coordinate.col() + 1)) {
+                                                newBoxes.add(new Coordinate(coordinate.row() - 1, coordinate.col() + 1));
                                             }
                                         }
                                     }
@@ -345,11 +346,11 @@ public class Day15 {
                                 for (List<Coordinate> row : rowsAndBoxes.reversed()) {
                                     for (Coordinate coordinate : row) {
                                         // progress the box
-                                        grid[coordinate.row - 1][coordinate.col] = "[";
-                                        grid[coordinate.row - 1][coordinate.col + 1] = "]";
+                                        grid[coordinate.row() - 1][coordinate.col()] = "[";
+                                        grid[coordinate.row() - 1][coordinate.col() + 1] = "]";
 
-                                        grid[coordinate.row][coordinate.col] = ".";
-                                        grid[coordinate.row][coordinate.col + 1] = ".";
+                                        grid[coordinate.row()][coordinate.col()] = ".";
+                                        grid[coordinate.row()][coordinate.col() + 1] = ".";
                                     }
                                 }
 
@@ -454,9 +455,6 @@ public class Day15 {
         }
 
         return String.valueOf(gpsSum);
-    }
-
-    record Coordinate(Integer row, Integer col) {
     }
 
 }

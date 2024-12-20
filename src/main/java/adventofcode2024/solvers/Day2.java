@@ -54,7 +54,7 @@ public class Day2 {
     private static boolean isUnsafe(List<String> levels) {
         boolean first = true;
         boolean unsafe = false;
-        Direction direction = null;
+        SortOrder sortOrder = null;
         Integer previous = 0;
 
         for (String s : levels) {
@@ -69,10 +69,10 @@ public class Day2 {
                     break;
                 }
 
-                if (direction == null) {
-                    direction = previous > current ? Direction.DESCENDING : Direction.ASCENDING;
+                if (sortOrder == null) {
+                    sortOrder = previous > current ? SortOrder.DESCENDING : SortOrder.ASCENDING;
                 } else {
-                    if (direction == Direction.ASCENDING) {
+                    if (sortOrder == SortOrder.ASCENDING) {
                         if (previous > current) {
                             unsafe = true;
                             break;
@@ -97,7 +97,7 @@ public class Day2 {
         return unsafe;
     }
 
-    public enum Direction {
+    public enum SortOrder {
         ASCENDING, DESCENDING
     }
 }

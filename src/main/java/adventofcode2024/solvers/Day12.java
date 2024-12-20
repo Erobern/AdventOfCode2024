@@ -1,6 +1,8 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.enums.Direction;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,11 +45,11 @@ public class Day12 {
                         for (Coordinate cur : currentCoords) {
                             // try up
                             try {
-                                if (Objects.equals(farm[cur.row - 1][cur.col], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row - 1][cur.col], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row - 1, cur.col));
-                                    traversedFarm[cur.row - 1][cur.col] = "Y";
-                                } else if (!Objects.equals(farm[cur.row - 1][cur.col], String.valueOf(currentField))) {
+                                if (Objects.equals(farm[cur.row() - 1][cur.col()], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row() - 1][cur.col()], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row() - 1, cur.col()));
+                                    traversedFarm[cur.row() - 1][cur.col()] = "Y";
+                                } else if (!Objects.equals(farm[cur.row() - 1][cur.col()], String.valueOf(currentField))) {
                                     fieldPerimeter++;
                                 }
                             } catch (Exception e) {
@@ -55,11 +57,11 @@ public class Day12 {
                             }
                             // try down
                             try {
-                                if (Objects.equals(farm[cur.row + 1][cur.col], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row + 1][cur.col], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row + 1, cur.col));
-                                    traversedFarm[cur.row + 1][cur.col] = "Y";
-                                } else if (!Objects.equals(farm[cur.row + 1][cur.col], String.valueOf(currentField))) {
+                                if (Objects.equals(farm[cur.row() + 1][cur.col()], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row() + 1][cur.col()], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row() + 1, cur.col()));
+                                    traversedFarm[cur.row() + 1][cur.col()] = "Y";
+                                } else if (!Objects.equals(farm[cur.row() + 1][cur.col()], String.valueOf(currentField))) {
                                     fieldPerimeter++;
                                 }
                             } catch (Exception e) {
@@ -67,11 +69,11 @@ public class Day12 {
                             }
                             // try left
                             try {
-                                if (Objects.equals(farm[cur.row][cur.col - 1], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row][cur.col - 1], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row, cur.col - 1));
-                                    traversedFarm[cur.row][cur.col - 1] = "Y";
-                                } else if (!Objects.equals(farm[cur.row][cur.col - 1], String.valueOf(currentField))) {
+                                if (Objects.equals(farm[cur.row()][cur.col() - 1], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row()][cur.col() - 1], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() - 1));
+                                    traversedFarm[cur.row()][cur.col() - 1] = "Y";
+                                } else if (!Objects.equals(farm[cur.row()][cur.col() - 1], String.valueOf(currentField))) {
                                     fieldPerimeter++;
                                 }
                             } catch (Exception e) {
@@ -79,11 +81,11 @@ public class Day12 {
                             }
                             // try right
                             try {
-                                if (Objects.equals(farm[cur.row][cur.col + 1], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row][cur.col + 1], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row, cur.col + 1));
-                                    traversedFarm[cur.row][cur.col + 1] = "Y";
-                                } else if (!Objects.equals(farm[cur.row][cur.col + 1], String.valueOf(currentField))) {
+                                if (Objects.equals(farm[cur.row()][cur.col() + 1], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row()][cur.col() + 1], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() + 1));
+                                    traversedFarm[cur.row()][cur.col() + 1] = "Y";
+                                } else if (!Objects.equals(farm[cur.row()][cur.col() + 1], String.valueOf(currentField))) {
                                     fieldPerimeter++;
                                 }
                             } catch (Exception e) {
@@ -142,37 +144,37 @@ public class Day12 {
                         for (Coordinate cur : currentCoords) {
                             // try up
                             try {
-                                if (Objects.equals(farm[cur.row - 1][cur.col], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row - 1][cur.col], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row - 1, cur.col));
-                                    traversedFarm[cur.row - 1][cur.col] = "Y";
+                                if (Objects.equals(farm[cur.row() - 1][cur.col()], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row() - 1][cur.col()], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row() - 1, cur.col()));
+                                    traversedFarm[cur.row() - 1][cur.col()] = "Y";
                                 }
                             } catch (Exception e) {
                             }
                             // try down
                             try {
-                                if (Objects.equals(farm[cur.row + 1][cur.col], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row + 1][cur.col], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row + 1, cur.col));
-                                    traversedFarm[cur.row + 1][cur.col] = "Y";
+                                if (Objects.equals(farm[cur.row() + 1][cur.col()], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row() + 1][cur.col()], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row() + 1, cur.col()));
+                                    traversedFarm[cur.row() + 1][cur.col()] = "Y";
                                 }
                             } catch (Exception e) {
                             }
                             // try left
                             try {
-                                if (Objects.equals(farm[cur.row][cur.col - 1], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row][cur.col - 1], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row, cur.col - 1));
-                                    traversedFarm[cur.row][cur.col - 1] = "Y";
+                                if (Objects.equals(farm[cur.row()][cur.col() - 1], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row()][cur.col() - 1], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() - 1));
+                                    traversedFarm[cur.row()][cur.col() - 1] = "Y";
                                 }
                             } catch (Exception e) {
                             }
                             // try right
                             try {
-                                if (Objects.equals(farm[cur.row][cur.col + 1], String.valueOf(currentField)) &&
-                                        Objects.equals(traversedFarm[cur.row][cur.col + 1], "N")) {
-                                    addNextCoord(nextCoords, new Coordinate(cur.row, cur.col + 1));
-                                    traversedFarm[cur.row][cur.col + 1] = "Y";
+                                if (Objects.equals(farm[cur.row()][cur.col() + 1], String.valueOf(currentField)) &&
+                                        Objects.equals(traversedFarm[cur.row()][cur.col() + 1], "N")) {
+                                    addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() + 1));
+                                    traversedFarm[cur.row()][cur.col() + 1] = "Y";
                                 }
                             } catch (Exception e) {
                             }
@@ -190,73 +192,73 @@ public class Day12 {
                     List<Coordinate> fenceFindingCoords = new ArrayList<>();
 
                     for (Coordinate allCoord : allCoords) {
-                        fenceFindingCoords.add(new Coordinate((allCoord.row * 2) + 3, (allCoord.col * 2) + 3));
+                        fenceFindingCoords.add(new Coordinate((allCoord.row() * 2) + 3, (allCoord.col() * 2) + 3));
                     }
 
                     String[][] fenceGrid = new String[lines.size() * 2 + 10][lines.getFirst().length() * 2 + 10];
 
                     for (Coordinate fenceFindingCoord : fenceFindingCoords) {
 
-                        fenceGrid[fenceFindingCoord.row][fenceFindingCoord.col] = currentField;
+                        fenceGrid[fenceFindingCoord.row()][fenceFindingCoord.col()] = currentField;
 
-                        final int finalFenceFindingRow = fenceFindingCoord.row;
-                        final int finalFenceFindingCol = fenceFindingCoord.col;
+                        final int finalFenceFindingRow = fenceFindingCoord.row();
+                        final int finalFenceFindingCol = fenceFindingCoord.col();
 
                         // test up
-                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == (finalFenceFindingRow - 2) &&
-                                coord.col == finalFenceFindingCol)) {
-                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col] = "#";
-                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col - 1] = "#";
-                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col + 1] = "#";
+                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == (finalFenceFindingRow - 2) &&
+                                coord.col() == finalFenceFindingCol)) {
+                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col()] = "#";
+                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() - 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() + 1] = "#";
                         }
                         // test down
-                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == (finalFenceFindingRow + 2) &&
-                                coord.col == finalFenceFindingCol)) {
-                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col] = "#";
-                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col - 1] = "#";
-                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col + 1] = "#";
+                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == (finalFenceFindingRow + 2) &&
+                                coord.col() == finalFenceFindingCol)) {
+                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col()] = "#";
+                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() - 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() + 1] = "#";
                         }
                         // test left
-                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == finalFenceFindingRow &&
-                                coord.col == (finalFenceFindingCol - 2))) {
-                            fenceGrid[fenceFindingCoord.row][fenceFindingCoord.col - 1] = "#";
-                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col - 1] = "#";
-                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col - 1] = "#";
+                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == finalFenceFindingRow &&
+                                coord.col() == (finalFenceFindingCol - 2))) {
+                            fenceGrid[fenceFindingCoord.row()][fenceFindingCoord.col() - 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() - 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() - 1] = "#";
                         }
                         // test right
-                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == finalFenceFindingRow &&
-                                coord.col == (finalFenceFindingCol + 2))) {
-                            fenceGrid[fenceFindingCoord.row][fenceFindingCoord.col + 1] = "#";
-                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col + 1] = "#";
-                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col + 1] = "#";
+                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == finalFenceFindingRow &&
+                                coord.col() == (finalFenceFindingCol + 2))) {
+                            fenceGrid[fenceFindingCoord.row()][fenceFindingCoord.col() + 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() + 1] = "#";
+                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() + 1] = "#";
                         }
 //                        // test up-left
-//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row - 2 &&
-//                                coord.col == fenceFindingCoord.col) &&
-//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row &&
-//                                        coord.col == fenceFindingCoord.col - 2)) {
-//                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col - 1] = "#";
+//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() - 2 &&
+//                                coord.col() == fenceFindingCoord.col()) &&
+//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() &&
+//                                        coord.col() == fenceFindingCoord.col() - 2)) {
+//                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() - 1] = "#";
 //                        }
 //                        // test up-right
-//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row - 2 &&
-//                                coord.col == fenceFindingCoord.col) &&
-//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row &&
-//                                        coord.col == fenceFindingCoord.col + 2)) {
-//                            fenceGrid[fenceFindingCoord.row - 1][fenceFindingCoord.col + 1] = "#";
+//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() - 2 &&
+//                                coord.col() == fenceFindingCoord.col()) &&
+//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() &&
+//                                        coord.col() == fenceFindingCoord.col() + 2)) {
+//                            fenceGrid[fenceFindingCoord.row() - 1][fenceFindingCoord.col() + 1] = "#";
 //                        }
 //                        // test down-left
-//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row + 2 &&
-//                                coord.col == fenceFindingCoord.col) &&
-//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row &&
-//                                        coord.col == fenceFindingCoord.col - 2)) {
-//                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col - 1] = "#";
+//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() + 2 &&
+//                                coord.col() == fenceFindingCoord.col()) &&
+//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() &&
+//                                        coord.col() == fenceFindingCoord.col() - 2)) {
+//                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() - 1] = "#";
 //                        }
 //                        // test down-right
-//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row + 2 &&
-//                                coord.col == fenceFindingCoord.col) &&
-//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row == fenceFindingCoord.row &&
-//                                        coord.col == fenceFindingCoord.col + 2)) {
-//                            fenceGrid[fenceFindingCoord.row + 1][fenceFindingCoord.col + 1] = "#";
+//                        if (fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() + 2 &&
+//                                coord.col() == fenceFindingCoord.col()) &&
+//                                fenceFindingCoords.stream().noneMatch(coord -> coord.row() == fenceFindingCoord.row() &&
+//                                        coord.col() == fenceFindingCoord.col() + 2)) {
+//                            fenceGrid[fenceFindingCoord.row() + 1][fenceFindingCoord.col() + 1] = "#";
 //                        }
                     }
 
@@ -420,16 +422,8 @@ public class Day12 {
     }
 
     private static void addNextCoord(List<Coordinate> nextCoords, Coordinate newCoord) {
-        if (nextCoords.stream().noneMatch(coord -> coord.row == newCoord.row && coord.col == newCoord.col)) {
+        if (nextCoords.stream().noneMatch(coord -> coord.row() == newCoord.row() && coord.col() == newCoord.col())) {
             nextCoords.add(newCoord);
         }
     }
-
-    enum Direction {
-        UP, DOWN, LEFT, RIGHT
-    }
-
-    record Coordinate(Integer row, Integer col) {
-    }
-
 }

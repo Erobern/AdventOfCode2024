@@ -1,6 +1,7 @@
 package adventofcode2024.solvers;
 
 import adventofcode2024.fileloaders.FileLoaders;
+import adventofcode2024.utils.records.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,32 +38,32 @@ public class Day10 {
                 for (Coordinate cur : currentCoords) {
                     // try up
                     try {
-                        if (Objects.equals(grid[cur.row - 1][cur.col], String.valueOf(finalI))) {
-                            addNextCoord(nextCoords, new Coordinate(cur.row - 1, cur.col));
+                        if (Objects.equals(grid[cur.row() - 1][cur.col()], String.valueOf(finalI))) {
+                            addNextCoord(nextCoords, new Coordinate(cur.row() - 1, cur.col()));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try down
                     try {
-                        if (Objects.equals(grid[cur.row + 1][cur.col], String.valueOf(finalI))) {
-                            addNextCoord(nextCoords, new Coordinate(cur.row + 1, cur.col));
+                        if (Objects.equals(grid[cur.row() + 1][cur.col()], String.valueOf(finalI))) {
+                            addNextCoord(nextCoords, new Coordinate(cur.row() + 1, cur.col()));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try left
                     try {
-                        if (Objects.equals(grid[cur.row][cur.col - 1], String.valueOf(finalI))) {
-                            addNextCoord(nextCoords, new Coordinate(cur.row, cur.col - 1));
+                        if (Objects.equals(grid[cur.row()][cur.col() - 1], String.valueOf(finalI))) {
+                            addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() - 1));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try right
                     try {
-                        if (Objects.equals(grid[cur.row][cur.col + 1], String.valueOf(finalI))) {
-                            addNextCoord(nextCoords, new Coordinate(cur.row, cur.col + 1));
+                        if (Objects.equals(grid[cur.row()][cur.col() + 1], String.valueOf(finalI))) {
+                            addNextCoord(nextCoords, new Coordinate(cur.row(), cur.col() + 1));
                         }
                     } catch (Exception ignored) {
 
@@ -82,7 +83,7 @@ public class Day10 {
     }
 
     private static void addNextCoord(List<Coordinate> nextCoords, Coordinate newCoord) {
-        if (nextCoords.stream().noneMatch(coord -> coord.row == newCoord.row && coord.col == newCoord.col)) {
+        if (nextCoords.stream().noneMatch(coord -> coord.row() == newCoord.row() && coord.col() == newCoord.col())) {
             nextCoords.add(newCoord);
         }
     }
@@ -115,32 +116,32 @@ public class Day10 {
                 for (Coordinate cur : currentCoords) {
                     // try up
                     try {
-                        if (Objects.equals(grid[cur.row - 1][cur.col], String.valueOf(finalI))) {
-                            nextCoords.add(new Coordinate(cur.row - 1, cur.col));
+                        if (Objects.equals(grid[cur.row() - 1][cur.col()], String.valueOf(finalI))) {
+                            nextCoords.add(new Coordinate(cur.row() - 1, cur.col()));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try down
                     try {
-                        if (Objects.equals(grid[cur.row + 1][cur.col], String.valueOf(finalI))) {
-                            nextCoords.add(new Coordinate(cur.row + 1, cur.col));
+                        if (Objects.equals(grid[cur.row() + 1][cur.col()], String.valueOf(finalI))) {
+                            nextCoords.add(new Coordinate(cur.row() + 1, cur.col()));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try left
                     try {
-                        if (Objects.equals(grid[cur.row][cur.col - 1], String.valueOf(finalI))) {
-                            nextCoords.add(new Coordinate(cur.row, cur.col - 1));
+                        if (Objects.equals(grid[cur.row()][cur.col() - 1], String.valueOf(finalI))) {
+                            nextCoords.add(new Coordinate(cur.row(), cur.col() - 1));
                         }
                     } catch (Exception ignored) {
 
                     }
                     // try right
                     try {
-                        if (Objects.equals(grid[cur.row][cur.col + 1], String.valueOf(finalI))) {
-                            nextCoords.add(new Coordinate(cur.row, cur.col + 1));
+                        if (Objects.equals(grid[cur.row()][cur.col() + 1], String.valueOf(finalI))) {
+                            nextCoords.add(new Coordinate(cur.row(), cur.col() + 1));
                         }
                     } catch (Exception ignored) {
 
@@ -157,8 +158,5 @@ public class Day10 {
         }
 
         return sum.toString();
-    }
-
-    record Coordinate(Integer row, Integer col) {
     }
 }
