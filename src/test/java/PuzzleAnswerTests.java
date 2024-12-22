@@ -145,6 +145,17 @@ public class PuzzleAnswerTests {
     @Test
     public void Puzzle21Solutions() {
         Assertions.assertEquals("126384", Day21.Puzzle1("Day21_1_TEST.txt"), "Day 21, Puzzle 1");
-        Assertions.assertEquals("126384", Day21.Puzzle2("Day21_1_TEST.txt"), "Day 21, Puzzle 2");
+        Assertions.assertEquals("154115708116294", Day21.Puzzle2("Day21_1_TEST.txt"), "Day 21, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle22Solutions() {
+        Assertions.assertEquals("37327623", Day22.Puzzle1("Day22_1_TEST.txt"), "Day 22, Puzzle 1");
+        Assertions.assertEquals("23", Day22.Puzzle2("Day22_2_TEST.txt"), "Day 22, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle22Solutions123() {
+        Assertions.assertEquals("9", Day22.Puzzle2("Day22_2_TEST_123.txt"), "Day 22, Puzzle 2");
     }
 }
