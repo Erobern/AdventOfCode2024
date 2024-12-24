@@ -90,7 +90,13 @@ public class Day24 {
             if (line.contains(":")) {
                 // input
                 List<String> initialValue = Arrays.stream(line.split(": ")).toList();
-                originalInputs.put(initialValue.get(0), Long.parseLong(initialValue.get(1)));
+                if (initialValue.get(0).startsWith("x")) {
+                    originalInputs.put(initialValue.get(0), 1L);
+                } else if (initialValue.get(0).startsWith("y")) {
+                    originalInputs.put(initialValue.get(0), 1L);
+                } else {
+                    originalInputs.put(initialValue.get(0), Long.parseLong(initialValue.get(1)));
+                }
 
             } else if (line.contains("->")) {
                 // mapping
@@ -196,6 +202,59 @@ public class Day24 {
         // z45 to z24 look to be locked in
         // z00 to maybe z04 also look to be locked
         // any swaps shouldn't harm these bits
+
+        Map<UUID, List<Wiring>> badWiringMap = new HashMap<>();
+
+
+        for (String xOp : xOps) {
+            List<String> currentInput = new ArrayList<>(Collections.singleton(xOp));
+            List<String> nextInputs = new ArrayList<>();
+
+            boolean nFound = false;
+            boolean nPlusOneFound = false;
+
+            String n = xOp.replace("x", "z");
+            String next = Integer.parseInt(xOp.replace("x", "")) < 9 ? "0" + (Integer.parseInt(xOp.replace("x", "")) + 1)
+                    : String.valueOf((Integer.parseInt(xOp.replace("x", "")) + 1));
+            String nPlusOne = "z".concat(next);
+
+            Integer iterations = 0;
+
+            List<Wiring> matchingWirings = new ArrayList<>();
+
+            do {
+
+                for (String s : currentInput) {
+                    matchingWirings.addAll(originalWirings.stream().filter(wiring -> wiring.input1().equals(s) || wiring.input2().equals(s)).toList());
+                    nextInputs.addAll(originalWirings.stream().filter(wiring -> wiring.input1().equals(s) || wiring.input2().equals(s)).map(Wiring::output).toList());
+                }
+
+                if (nextInputs.contains(n)) {
+                    nFound = true;
+                }
+                if (nextInputs.contains(nPlusOne)) {
+                    nPlusOneFound = true;
+                }
+
+                currentInput = new ArrayList<>(nextInputs.stream().filter(s -> !s.startsWith("z")).toList());
+                nextInputs = new ArrayList<>();
+
+                iterations++;
+
+                if (iterations > 6) {
+                    // circular loop probably
+                    nFound = true;
+                    nPlusOneFound = true;
+                }
+
+            } while (!(nFound && nPlusOneFound));
+
+            badWiringMap.put(UUID.randomUUID(), matchingWirings);
+
+        }
+
+        // manual inspection of wiring diagram occured here
+
 
         return zOutputDecimal.toString();
     }

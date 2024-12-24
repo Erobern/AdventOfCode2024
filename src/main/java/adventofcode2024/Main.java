@@ -77,6 +77,6 @@ public class Main {
 
 
         System.out.println("Day24/Puzzle1: " + Day24.Puzzle1("Day24_1.txt"));
-        System.out.println("Day24/Puzzle2: " + Day24.Puzzle2("Day24_1.txt"));
+        System.out.println("Day24/Puzzle2: " + Day24.Puzzle2("Day24_1_FIXED.txt"));
     }
 }
