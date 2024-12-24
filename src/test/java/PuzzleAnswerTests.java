@@ -164,4 +164,10 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("7", Day23.Puzzle1("Day23_1_TEST.txt"), "Day 23, Puzzle 1");
         Assertions.assertEquals("co,de,ka,ta", Day23.Puzzle2("Day23_1_TEST.txt"), "Day 23, Puzzle 2");
     }
+
+    @Test
+    public void Puzzle24Solutions() {
+        Assertions.assertEquals("2024", Day24.Puzzle1("Day24_1_TEST.txt"), "Day 24, Puzzle 1");
+        //Assertions.assertEquals("xxxxxx", Day24.Puzzle2("Day24_1_TEST.txt"), "Day 24, Puzzle 2");
+    }
 }
