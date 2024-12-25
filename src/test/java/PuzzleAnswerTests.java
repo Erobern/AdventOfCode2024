@@ -168,6 +168,11 @@ public class PuzzleAnswerTests {
     @Test
     public void Puzzle24Solutions() {
         Assertions.assertEquals("2024", Day24.Puzzle1("Day24_1_TEST.txt"), "Day 24, Puzzle 1");
-        //Assertions.assertEquals("xxxxxx", Day24.Puzzle2("Day24_1_TEST.txt"), "Day 24, Puzzle 2");
+    }
+
+    @Test
+    public void Puzzle25Solutions() {
+//        Assertions.assertEquals("41", Day25.Puzzle1("Day25_1_TEST.txt"), "Day 25, Puzzle 1");
+//        Assertions.assertEquals("6", Day25.Puzzle2("Day25_1_TEST.txt"), "Day 25, Puzzle 2");
     }
 }
